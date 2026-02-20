@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://lightemitter01"]
+
+[ext_resource type="Script" path="res://Scripts/LightEmitter.gd" id="1_lightemitter"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_emitter"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emitter"]
+albedo_color = Color(1, 0.819608, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.819608, 0, 1)
+
+[node name="LightEmitter" type="Node3D"]
+script = ExtResource("1_lightemitter")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_emitter")
+surface_material_override/0 = SubResource("StandardMaterial3D_emitter")

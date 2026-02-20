@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://reflector01"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ref"]
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ref"]
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ref"]
+emission_enabled = true
+emission = Color(0.184314, 0.505882, 0.509804, 1)
+metallic = 1.0
+roughness = 0.1
+
+[node name="Reflector" type="StaticBody3D" groups=["Reflectors"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ref")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ref")
+surface_material_override/0 = SubResource("StandardMaterial3D_ref")
