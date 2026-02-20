@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://mainlevel123"]
+[gd_scene load_steps=9 format=3 uid="uid://mainlevel123"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_abcde"]
+[ext_resource type="PackedScene" uid="uid://sirajlens01" path="res://Scenes/Lens.tscn" id="2_lens"]
+[ext_resource type="PackedScene" uid="uid://lightemitter01" path="res://Scenes/LightEmitter.tscn" id="3_emitter"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(50, 1, 50)
@@ -53,3 +55,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15,
 [node name="TopDownCamera" type="Camera3D" parent="Player/TopDownPivot"]
 projection = 1
 size = 20.0
+
+[node name="LightEmitter" parent="." instance=ExtResource("3_emitter")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
+
+[node name="Lens" parent="." instance=ExtResource("2_lens")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -15)
+

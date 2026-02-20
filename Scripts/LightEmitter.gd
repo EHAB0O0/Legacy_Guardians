@@ -41,6 +41,7 @@ func _create_beam_segment(index: int) -> void:
 func _update_beams() -> void:
 	var current_origin = global_position
 	var current_dir = -global_transform.basis.z.normalized()
+	var current_color = beam_color
 	
 	for i in range(max_bounces):
 		if i >= raycasts.size():
@@ -72,6 +73,11 @@ func _update_beams() -> void:
 			mesh.look_at(hit_point, Vector3.UP if abs(current_dir.y) < 0.99 else Vector3.RIGHT)
 			mesh.rotate_object_local(Vector3.RIGHT, PI / 2.0)
 			mesh.scale = Vector3(1, distance, 1)
+			
+			# apply current color
+			if mesh.material_override:
+				mesh.material_override.albedo_color = current_color
+				mesh.material_override.emission = current_color
 		else:
 			mesh.visible = false
 			
@@ -81,6 +87,14 @@ func _update_beams() -> void:
 				var normal = ray.get_collision_normal()
 				current_dir = current_dir.bounce(normal)
 				current_origin = hit_point + current_dir * 0.01 # offset to avoid getting stuck
+			elif collider and collider.is_in_group("Lenses") and collider.has_method("get_refracted_direction"):
+				# Refract through lens
+				var normal = ray.get_collision_normal()
+				current_dir = collider.get_refracted_direction(current_dir, normal)
+				current_origin = hit_point + current_dir * 0.1 # offset past the lens surface
+				# Mix colors for neon effect
+				var tint = collider.get_tint()
+				current_color = current_color.lerp(tint, 0.8)
 			elif collider and collider.has_method("receive_light"):
 				collider.receive_light()
 				_hide_remaining_segments(i + 1)
