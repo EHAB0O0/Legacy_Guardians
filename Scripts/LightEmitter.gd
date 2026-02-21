@@ -53,6 +53,8 @@ func _update_beams() -> void:
 		# set global ray position, calculate local target
 		ray.global_position = current_origin
 		ray.target_position = ray.to_local(current_origin + current_dir * max_distance)
+		ray.hit_from_inside = true
+		ray.collision_mask = 0xFFFFFFFF # Collide with everything
 		ray.force_raycast_update()
 		
 		var hit_point = current_origin + current_dir * max_distance

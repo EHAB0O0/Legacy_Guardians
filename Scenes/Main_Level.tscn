@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://mainlevel123"]
+[gd_scene format=3 uid="uid://mainlevel123"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_abcde"]
+[ext_resource type="Script" uid="uid://cs6v8pdvbp0ub" path="res://Scripts/PlayerController.gd" id="1_abcde"]
 [ext_resource type="PackedScene" uid="uid://sirajlens01" path="res://Scenes/Lens.tscn" id="2_lens"]
-[ext_resource type="PackedScene" uid="uid://lightemitter01" path="res://Scenes/LightEmitter.tscn" id="3_emitter"]
+[ext_resource type="PackedScene" uid="uid://doijk3f5hk0q3" path="res://Scenes/LightEmitter.tscn" id="3_emitter"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(50, 1, 50)
@@ -17,48 +17,49 @@ size = Vector3(50, 1, 50)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
 albedo_color = Color(0.188235, 0.545098, 0.819608, 1)
 
-[node name="Main_Level" type="Node3D"]
+[node name="Main_Level" type="Node3D" unique_id=1677351291]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1866087349]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
 shadow_enabled = true
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=810160420]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1772796615]
 shape = SubResource("BoxShape3D_floor")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=734141414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015961885, 0, 0.05571711)
+layers = 1048575
 mesh = SubResource("BoxMesh_floor")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=917355217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("1_abcde")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=644703919]
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1323831161]
 mesh = SubResource("CapsuleMesh_player")
 surface_material_override/0 = SubResource("StandardMaterial3D_player")
 
-[node name="ThirdPersonPivot" type="Node3D" parent="Player"]
+[node name="ThirdPersonPivot" type="Node3D" parent="Player" unique_id=1261090055]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.5, 0)
 
-[node name="ThirdPersonCamera" type="Camera3D" parent="Player/ThirdPersonPivot"]
+[node name="ThirdPersonCamera" type="Camera3D" parent="Player/ThirdPersonPivot" unique_id=1914585264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="TopDownPivot" type="Node3D" parent="Player"]
+[node name="TopDownPivot" type="Node3D" parent="Player" unique_id=68518553]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
 
-[node name="TopDownCamera" type="Camera3D" parent="Player/TopDownPivot"]
+[node name="TopDownCamera" type="Camera3D" parent="Player/TopDownPivot" unique_id=1091677695]
 projection = 1
 size = 20.0
 
-[node name="LightEmitter" parent="." instance=ExtResource("3_emitter")]
+[node name="LightEmitter" parent="." unique_id=1888614384 instance=ExtResource("3_emitter")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
 
-[node name="Lens" parent="." instance=ExtResource("2_lens")]
+[node name="Lens" parent="." unique_id=1729843651 instance=ExtResource("2_lens")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -15)
-
