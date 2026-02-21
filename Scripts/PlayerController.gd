@@ -47,8 +47,11 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * speed
 		
 		# Rotate character to face direction of movement
-		var target_transform = transform.looking_at(global_position + direction, Vector3.UP)
-		transform = transform.interpolate_with(target_transform, rotation_speed * delta)
+		if direction.length_squared() > 0.001:
+			var current_quat = transform.basis.get_rotation_quaternion()
+			var target_basis = Basis.looking_at(direction, Vector3.UP)
+			var target_quat = target_basis.get_rotation_quaternion()
+			transform.basis = Basis(current_quat.slerp(target_quat, rotation_speed * delta))
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)

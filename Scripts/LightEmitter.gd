@@ -11,10 +11,10 @@ var beam_meshes: Array[MeshInstance3D] = []
 func _ready() -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_update_beams()
 
-func _create_beam_segment(index: int) -> void:
+func _create_beam_segment(_index: int) -> void:
 	var ray = RayCast3D.new()
 	add_child(ray)
 	raycasts.append(ray)
@@ -43,6 +43,8 @@ func _update_beams() -> void:
 	var current_dir = -global_transform.basis.z.normalized()
 	var current_color = beam_color
 	
+	var ignored_bodies = []
+	
 	for i in range(max_bounces):
 		if i >= raycasts.size():
 			_create_beam_segment(i)
@@ -50,6 +52,10 @@ func _update_beams() -> void:
 		var ray = raycasts[i]
 		var mesh = beam_meshes[i]
 		
+		ray.clear_exceptions()
+		for body in ignored_bodies:
+			ray.add_exception(body)
+			
 		# set global ray position, calculate local target
 		ray.global_position = current_origin
 		ray.target_position = ray.to_local(current_origin + current_dir * max_distance)
@@ -93,7 +99,8 @@ func _update_beams() -> void:
 				# Refract through lens
 				var normal = ray.get_collision_normal()
 				current_dir = collider.get_refracted_direction(current_dir, normal)
-				current_origin = hit_point + current_dir * 0.1 # offset past the lens surface
+				current_origin = hit_point # the new ray will start here and ignore this lens
+				ignored_bodies.append(collider)
 				# Mix colors for neon effect
 				var tint = collider.get_tint()
 				current_color = current_color.lerp(tint, 0.8)

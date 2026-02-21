@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cs6v8pdvbp0ub" path="res://Scripts/PlayerController.gd" id="1_abcde"]
 [ext_resource type="PackedScene" uid="uid://sirajlens01" path="res://Scenes/Lens.tscn" id="2_lens"]
 [ext_resource type="PackedScene" uid="uid://doijk3f5hk0q3" path="res://Scenes/LightEmitter.tscn" id="3_emitter"]
+[ext_resource type="PackedScene" uid="uid://reflector01" path="res://Scenes/Reflector.tscn" id="4_l0b83"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(50, 1, 50)
@@ -30,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_floor")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=734141414]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015961885, 0, 0.05571711)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33910108, 0, -7.8612175)
 layers = 1048575
 mesh = SubResource("BoxMesh_floor")
 
@@ -63,3 +64,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
 
 [node name="Lens" parent="." unique_id=1729843651 instance=ExtResource("2_lens")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -15)
+
+[node name="Lens2" parent="." unique_id=1986557536 instance=ExtResource("2_lens")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10216284, 1.5411155, -10.730583)
+type = 2
+
+[node name="Reflector" parent="." unique_id=1015922309 instance=ExtResource("4_l0b83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04485178, 1.7550464, -8.29904)

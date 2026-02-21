@@ -14,7 +14,7 @@ func _ready() -> void:
 	mesh_instance.material_override = material
 	_update_color()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_activated != _hit_this_frame:
 		is_activated = _hit_this_frame
 		_update_color()
