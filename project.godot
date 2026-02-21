@@ -8,12 +8,12 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Guardians of the Legacy"
 run/main_scene="res://Scenes/Main_Level.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-
-[rendering]
-
-renderer/rendering_method="forward_plus"
+config/features=PackedStringArray("4.6", "Forward Plus")

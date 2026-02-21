@@ -1,0 +1,12 @@
+# Godot-specific ignores
+.godot/
+*.uid
+*.translation
+*.import
+
+# Godot-specific macOS ignores
+.DS_Store
+
+# Temporary files
+*.tmp
+*~
